@@ -111,6 +111,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
                 key={coffee.id}
                 coffee={coffee}
                 onPress={() => handleCoffeePress(coffee)}
+                showFavorite={true}
               />
             ))}
           </ScrollView>

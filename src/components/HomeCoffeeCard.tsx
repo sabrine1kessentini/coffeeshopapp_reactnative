@@ -24,7 +24,7 @@ const HomeCoffeeCard: React.FC<HomeCoffeeCardProps> = ({
   const favorite = isFavorite(coffee.id);
 
   const handleAddToCart = () => {
-    addToCart(coffee, coffee.size[0], 1);
+    addToCart(coffee, coffee.size[0], 'Medium', 1);
   };
 
   return (
@@ -58,7 +58,7 @@ const HomeCoffeeCard: React.FC<HomeCoffeeCardProps> = ({
         <Text style={styles.name}>{coffee.name}</Text>
         <Text style={styles.description}>{coffee.description}</Text>
         <View style={styles.priceContainer}>
-          <Text style={styles.price}>RP {Math.round(coffee.price * 10000).toLocaleString()}</Text>
+          <Text style={styles.price}>{coffee.price.toFixed(2)} DT</Text>
           <TouchableOpacity
             style={styles.addButton}
             onPress={(e) => {
@@ -118,6 +118,8 @@ const styles = StyleSheet.create({
     height: 28,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: 14,
   },
   favoriteIcon: {
     fontSize: 18,

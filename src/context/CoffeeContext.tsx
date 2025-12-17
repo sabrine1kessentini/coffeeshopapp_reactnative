@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Coffee, coffeeList, categories } from '../data/coffeeData';
 import { loadOrders, saveOrders } from '../utils/ordersStorage';
 
@@ -6,6 +7,7 @@ export interface CartItem {
   id: string;
   coffee: Coffee;
   size: string;
+  sugarLevel: string;
   quantity: number;
   price: number;
 }
@@ -23,7 +25,7 @@ interface CoffeeContextType {
   cart: CartItem[];
   orders: Order[];
   favorites: string[]; // IDs des produits favoris
-  addToCart: (coffee: Coffee, size: string, quantity: number) => void;
+  addToCart: (coffee: Coffee, size: string, sugarLevel: string, quantity: number) => void;
   removeFromCart: (itemId: string) => void;
   updateCartItemQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
@@ -58,6 +60,7 @@ export const CoffeeProvider: React.FC<CoffeeProviderProps> = ({ children }) => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [ordersLoaded, setOrdersLoaded] = useState(false);
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false);
 
   // Charger les commandes au démarrage
   useEffect(() => {
@@ -69,6 +72,23 @@ export const CoffeeProvider: React.FC<CoffeeProviderProps> = ({ children }) => {
     loadOrdersData();
   }, []);
 
+  // Charger les favoris au démarrage
+  useEffect(() => {
+    const loadFavoritesData = async () => {
+      try {
+        const storedFavorites = await AsyncStorage.getItem('favorites');
+        if (storedFavorites) {
+          setFavorites(JSON.parse(storedFavorites));
+        }
+        setFavoritesLoaded(true);
+      } catch (error) {
+        console.error('Erreur lors du chargement des favoris:', error);
+        setFavoritesLoaded(true);
+      }
+    };
+    loadFavoritesData();
+  }, []);
+
   // Sauvegarder les commandes quand elles changent
   useEffect(() => {
     if (ordersLoaded) {
@@ -76,10 +96,19 @@ export const CoffeeProvider: React.FC<CoffeeProviderProps> = ({ children }) => {
     }
   }, [orders, ordersLoaded]);
 
-  const addToCart = (coffee: Coffee, size: string, quantity: number) => {
+  // Sauvegarder les favoris quand ils changent
+  useEffect(() => {
+    if (favoritesLoaded) {
+      AsyncStorage.setItem('favorites', JSON.stringify(favorites)).catch((error) => {
+        console.error('Erreur lors de la sauvegarde des favoris:', error);
+      });
+    }
+  }, [favorites, favoritesLoaded]);
+
+  const addToCart = (coffee: Coffee, size: string, sugarLevel: string, quantity: number) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(
-        (item) => item.coffee.id === coffee.id && item.size === size,
+        (item) => item.coffee.id === coffee.id && item.size === size && item.sugarLevel === sugarLevel,
       );
 
       if (existingItem) {
@@ -91,9 +120,10 @@ export const CoffeeProvider: React.FC<CoffeeProviderProps> = ({ children }) => {
       }
 
       const newItem: CartItem = {
-        id: `${coffee.id}-${size}-${Date.now()}`,
+        id: `${coffee.id}-${size}-${sugarLevel}-${Date.now()}`,
         coffee,
         size,
+        sugarLevel,
         quantity,
         price: coffee.price,
       };

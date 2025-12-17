@@ -43,7 +43,7 @@ const Cart: React.FC = () => {
 
     Alert.alert(
       'Confirm Order',
-      `Total: $${getCartTotal().toFixed(2)}\n\nDo you want to proceed with checkout?`,
+      `Total: ${getCartTotal().toFixed(2)} DT\n\nDo you want to proceed with checkout?`,
       [
         {
           text: 'Cancel',
@@ -71,7 +71,7 @@ const Cart: React.FC = () => {
       // Afficher le message de succès
       Alert.alert(
         'Order Placed! 🎉',
-        `Your order of $${total.toFixed(2)} has been placed successfully.\n\nOrder ID: ${orderId.split('-')[1]}\n\nYou can view your orders in the Profile section.`,
+        `Your order of ${total.toFixed(2)} DT has been placed successfully.\n\nOrder ID: ${orderId.split('-')[1]}\n\nYou can view your orders in the Profile section.`,
         [
           {
             text: 'OK',
@@ -103,9 +103,12 @@ const Cart: React.FC = () => {
               <CartItem
                 key={item.id}
                 name={item.coffee.name}
-                description={`${item.coffee.description} (${item.size})`}
+                description={item.coffee.description}
+                size={item.size}
+                sugarLevel={item.sugarLevel}
                 price={item.price}
                 quantity={item.quantity}
+                image={item.coffee.image}
                 onIncrease={() => handleIncrease(item.id, item.quantity)}
                 onDecrease={() => handleDecrease(item.id, item.quantity)}
                 onRemove={() => removeFromCart(item.id)}
@@ -118,7 +121,7 @@ const Cart: React.FC = () => {
         <View style={styles.footer}>
           <View style={styles.totalContainer}>
             <Text style={styles.totalLabel}>Total</Text>
-            <Text style={styles.totalPrice}>$ {total.toFixed(2)}</Text>
+            <Text style={styles.totalPrice}>{total.toFixed(2)} DT</Text>
           </View>
           <Button
             title={isProcessing ? 'Processing...' : 'Checkout'}

@@ -140,11 +140,11 @@ const Orders: React.FC<OrdersProps> = ({ navigation }) => {
                       <View style={styles.itemInfo}>
                         <Text style={styles.itemName}>{item.coffee.name}</Text>
                         <Text style={styles.itemDescription}>
-                          {item.coffee.description} ({item.size}) x{item.quantity}
+                          {item.coffee.description} ({item.size}, Sugar: {item.sugarLevel}) x{item.quantity}
                         </Text>
                       </View>
                       <Text style={styles.itemPrice}>
-                        ${(item.price * item.quantity).toFixed(2)}
+                        {(item.price * item.quantity).toFixed(2)} DT
                       </Text>
                     </View>
                   ))}
@@ -152,7 +152,7 @@ const Orders: React.FC<OrdersProps> = ({ navigation }) => {
 
                 <View style={styles.orderFooter}>
                   <Text style={styles.totalLabel}>Total</Text>
-                  <Text style={styles.totalPrice}>${order.total.toFixed(2)}</Text>
+                  <Text style={styles.totalPrice}>{order.total.toFixed(2)} DT</Text>
                 </View>
               </View>
             ))}

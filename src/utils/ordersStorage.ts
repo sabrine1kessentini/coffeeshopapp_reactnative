@@ -12,6 +12,7 @@ interface OrderJson {
     coffeeName: string;
     coffeeDescription: string;
     size: string;
+    sugarLevel: string;
     quantity: number;
     price: number;
   }>;
@@ -31,6 +32,7 @@ export const saveOrders = async (orders: Order[]): Promise<void> => {
         coffeeName: item.coffee.name,
         coffeeDescription: item.coffee.description,
         size: item.size,
+        sugarLevel: item.sugarLevel || 'Medium', // Valeur par défaut pour compatibilité
         quantity: item.quantity,
         price: item.price,
       })),
@@ -70,6 +72,7 @@ export const loadOrders = async (): Promise<Order[]> => {
           size: [],
         } as any,
         size: item.size,
+        sugarLevel: item.sugarLevel || 'Medium', // Valeur par défaut pour compatibilité
         quantity: item.quantity,
         price: item.price,
       })),

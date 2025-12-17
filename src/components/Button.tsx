@@ -5,9 +5,10 @@ type ButtonProps = {
   title: string;
   onPress: () => void;
   disabled?: boolean;
+  price?: string | number;
 };
 
-const Button: React.FC<ButtonProps> = ({ title, onPress, disabled = false }) => {
+const Button: React.FC<ButtonProps> = ({ title, onPress, disabled = false, price }) => {
   return (
     <TouchableOpacity
       style={[styles.button, disabled && styles.buttonDisabled]}
@@ -15,15 +16,23 @@ const Button: React.FC<ButtonProps> = ({ title, onPress, disabled = false }) => 
       activeOpacity={0.8}
       disabled={disabled}>
       <Text style={[styles.text, disabled && styles.textDisabled]}>{title}</Text>
+      {price !== undefined && (
+        <Text style={[styles.priceText, disabled && styles.textDisabled]}>
+          {typeof price === 'number' ? price.toFixed(2) : price} DT
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 16,
     paddingHorizontal: 24,
-    backgroundColor: '#6F4E37',
+    backgroundColor: '#2D5016',
     borderRadius: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -33,8 +42,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#FFFFFF',
-    textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  priceText: {
+    color: '#FFFFFF',
+    fontSize: 18,
     fontWeight: 'bold',
   },
   buttonDisabled: {
