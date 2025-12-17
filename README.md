@@ -1,6 +1,26 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Coffee Shop React Native App ☕
 
-# Getting Started
+Application React Native pour une boutique de café, créée avec un design moderne et une interface utilisateur intuitive.
+
+## Fonctionnalités
+
+- 🏠 **Écran d'accueil** : Affichage des catégories de café et des produits populaires
+- 📋 **Menu** : Liste complète de tous les cafés disponibles
+- 🛒 **Panier** : Gestion du panier d'achat avec calcul du total
+- 👤 **Profil** : Gestion du profil utilisateur
+- ☕ **Détails du produit** : Page de détails pour chaque café avec sélection de taille
+
+## Structure du projet
+
+```
+src/
+├── components/      # Composants réutilisables (CoffeeCard, CategoryCard, etc.)
+├── screens/         # Écrans de l'application (Home, Menu, Cart, Profile)
+├── navigation/      # Configuration de la navigation
+└── data/           # Données statiques (coffeeData)
+```
+
+## Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 

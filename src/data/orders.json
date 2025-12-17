@@ -1,0 +1,21 @@
+{
+  "orders": [
+    {
+      "id": "ORDER-1735123456789",
+      "items": [
+        {
+          "id": "1-S-1735123456789",
+          "coffeeId": "1",
+          "coffeeName": "Cappuccino",
+          "coffeeDescription": "With Oat Milk",
+          "size": "M",
+          "quantity": 2,
+          "price": 4.2
+        }
+      ],
+      "total": 8.4,
+      "date": "2024-12-25T10:30:00.000Z",
+      "status": "completed"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "categories": [
+    { "id": "1", "name": "Cappuccino", "icon": "☕" },
+    { "id": "2", "name": "Espresso", "icon": "☕" },
+    { "id": "3", "name": "Latte", "icon": "☕" },
+    { "id": "4", "name": "Americano", "icon": "☕" }
+  ],
+  "coffees": [
+    {
+      "id": "1",
+      "name": "Cappuccino",
+      "description": "With Oat Milk",
+      "price": 4.20,
+      "imagePath": "cappuccino1.png",
+      "category": "Cappuccino",
+      "rating": 4.5,
+      "size": ["S", "M", "L"]
+    },
+    {
+      "id": "2",
+      "name": "Cappuccino",
+      "description": "With Chocolate",
+      "price": 3.50,
+      "imagePath": "cappuccino2.png",
+      "category": "Cappuccino",
+      "rating": 4.8,
+      "size": ["S", "M", "L"]
+    },
+    {
+      "id": "3",
+      "name": "Espresso",
+      "description": "Classic Espresso",
+      "price": 2.50,
+      "imagePath": "espresso1.png",
+      "category": "Espresso",
+      "rating": 4.3,
+      "size": ["S", "M"]
+    },
+    {
+      "id": "4",
+      "name": "Latte",
+      "description": "With Vanilla",
+      "price": 4.50,
+      "imagePath": "latte1.png",
+      "category": "Latte",
+      "rating": 4.7,
+      "size": ["S", "M", "L"]
+    },
+    {
+      "id": "5",
+      "name": "Americano",
+      "description": "Classic Americano",
+      "price": 3.00,
+      "imagePath": "americano1.png",
+      "category": "Americano",
+      "rating": 4.2,
+      "size": ["S", "M", "L"]
+    },
+    {
+      "id": "6",
+      "name": "Cappuccino",
+      "description": "With Caramel",
+      "price": 4.80,
+      "imagePath": "cappuccino3.png",
+      "category": "Cappuccino",
+      "rating": 4.9,
+      "size": ["S", "M", "L"]
+    }
+  ]
+}
+
