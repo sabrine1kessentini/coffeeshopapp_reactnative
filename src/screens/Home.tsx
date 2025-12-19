@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
+  FlatList,
 } from 'react-native';
 import HomeCoffeeCard from '../components/HomeCoffeeCard';
 import CategoryCard from '../components/CategoryCard';
@@ -83,20 +84,24 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         {/* Categories */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Categories</Text>
-          <ScrollView
+          <FlatList
+            data={categories}
             horizontal
             showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.categoriesContent}
             style={styles.categoriesContainer}
-            contentContainerStyle={styles.categoriesContent}>
-            {categories.map((category) => (
+            renderItem={({ item }) => (
               <CategoryCard
-                key={category.id}
-                category={category}
-                isSelected={selectedCategory === category.id}
-                onPress={() => setSelectedCategory(category.id)}
+                category={item}
+                isSelected={selectedCategory === item.id}
+                onPress={() => setSelectedCategory(item.id)}
               />
-            ))}
-          </ScrollView>
+            )}
+            nestedScrollEnabled={true}
+            bounces={true}
+            decelerationRate="fast"
+          />
         </View>
 
         {/* Coffee List - Horizontal */}
@@ -212,6 +217,7 @@ const styles = StyleSheet.create({
   },
   categoriesContent: {
     paddingRight: 20,
+    paddingBottom: 4,
   },
   coffeeListContainer: {
     paddingLeft: 20,

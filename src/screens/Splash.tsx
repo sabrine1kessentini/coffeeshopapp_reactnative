@@ -39,15 +39,12 @@ const Splash: React.FC<SplashProps> = ({ navigation }) => {
           {/* Text Content */}
           <View style={styles.textContainer}>
             <Text style={styles.headline}>
-              Coffee so good, your taste buds will love it
+              Coffee so good,{'\n'}your taste buds{'\n'}will love it
             </Text>
             <Text style={styles.subheadline}>
-              The best grain, the finest roast, the most powerful flavor.
+              The best grain, the finest roas, the{'\n'}most powerful flavor.
             </Text>
           </View>
-
-          {/* Decorative Element */}
-          <View style={styles.decorativeLine} />
 
           {/* Get Started Button */}
           <TouchableOpacity
@@ -83,70 +80,63 @@ const styles = StyleSheet.create({
   splashImage: {
     position: 'absolute',
     width: '100%',
-    height: '100%',
-    top: 0,
+    height: '60%',
+    top: '10%',
     left: 0,
     right: 0,
-    bottom: 0,
     zIndex: 1,
+    alignSelf: 'center',
   },
   overlay: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: 50,
-    paddingHorizontal: 30,
-    paddingTop: 100,
+    paddingBottom: 60,
+    paddingHorizontal: 40,
     zIndex: 2,
     backgroundColor: 'transparent',
   },
   textContainer: {
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 40,
     width: '100%',
   },
   headline: {
-    fontSize: 34,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 12,
-    lineHeight: 42,
-    letterSpacing: 0.5,
+    lineHeight: 36,
+    letterSpacing: 0,
   },
   subheadline: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#FFFFFF',
     textAlign: 'center',
-    opacity: 0.95,
-    lineHeight: 22,
-    paddingHorizontal: 20,
-  },
-  decorativeLine: {
-    width: 50,
-    height: 3,
-    backgroundColor: '#2D5016', // Dark green
-    borderRadius: 2,
-    marginBottom: 35,
+    opacity: 1,
+    lineHeight: 20,
+    paddingHorizontal: 0,
   },
   getStartedButton: {
-    backgroundColor: '#2D5016', // Dark green
-    borderRadius: 25,
-    paddingVertical: 18,
-    paddingHorizontal: 70,
-    minWidth: 220,
+    backgroundColor: '#2D5016',
+    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 50,
+    width: '100%',
+    maxWidth: 300,
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   getStartedText: {
     color: '#FFFFFF',
-    fontSize: 17,
-    fontWeight: 'bold',
-    letterSpacing: 0.5,
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 0.3,
   },
 });
 

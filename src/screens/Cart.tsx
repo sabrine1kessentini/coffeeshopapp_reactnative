@@ -109,22 +109,23 @@ const Cart: React.FC = () => {
                 price={item.price}
                 quantity={item.quantity}
                 image={item.coffee.image}
+                coffeeId={item.coffee.id}
                 onIncrease={() => handleIncrease(item.id, item.quantity)}
                 onDecrease={() => handleDecrease(item.id, item.quantity)}
                 onRemove={() => removeFromCart(item.id)}
               />
             ))}
+            <View style={styles.totalContainer}>
+              <Text style={styles.totalLabel}>Total</Text>
+              <Text style={styles.totalPrice}>{total.toFixed(2)} DT</Text>
+            </View>
           </>
         )}
       </ScrollView>
       {cart.length > 0 && (
         <View style={styles.footer}>
-          <View style={styles.totalContainer}>
-            <Text style={styles.totalLabel}>Total</Text>
-            <Text style={styles.totalPrice}>{total.toFixed(2)} DT</Text>
-          </View>
           <Button
-            title={isProcessing ? 'Processing...' : 'Checkout'}
+            title={isProcessing ? 'Processing...' : 'Buy'}
             onPress={handleCheckout}
             disabled={isProcessing}
           />
@@ -178,7 +179,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 16,
     marginBottom: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    marginHorizontal: -4,
   },
   totalLabel: {
     fontSize: 18,

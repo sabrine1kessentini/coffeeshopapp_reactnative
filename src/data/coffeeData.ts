@@ -15,15 +15,15 @@ export interface Coffee {
 export interface Category {
   id: string;
   name: string;
-  icon: string;
+  
 }
 
 // Catégories disponibles
 export const categories: Category[] = [
-  { id: '1', name: 'Cappuccino', icon: '☕' },
-  { id: '2', name: 'Espresso', icon: '☕' },
-  { id: '3', name: 'Latte', icon: '☕' },
-  { id: '4', name: 'Americano', icon: '☕' },
+  { id: '1', name: 'Cappuccino' },
+  { id: '2', name: 'Espresso' },
+  { id: '3', name: 'Latte' },
+  { id: '4', name: 'Americano' },
 ];
 
 // Charger l'image une seule fois pour éviter les erreurs
@@ -39,18 +39,18 @@ export const coffeeList: Coffee[] = [
     image: require('../assets/images/coffee/Cappuccino.png'),
     category: 'Cappuccino',
     rating: 4.5,
-    size: ['S', 'M', 'L'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
   {
     id: '2',
     name: 'Cappuccino',
-    description: 'With Chocolate',
+    description: 'With Ice',
     price: 3.50,
-    image: cappuccinoImage,
+    image: require('../assets/images/coffee/chocolat chaud.png'),
     category: 'Cappuccino',
     rating: 4.8,
-    size: ['S', 'M', 'L'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
   {
@@ -58,10 +58,10 @@ export const coffeeList: Coffee[] = [
     name: 'Espresso',
     description: 'Classic Espresso',
     price: 2.50,
-    image: cappuccinoImage, // Remplacez par require('../assets/images/coffee/espresso1.png') quand disponible
+    image: require('../assets/images/coffee/espresso2.png'), // Remplacez par require('../assets/images/coffee/espresso1.png') quand disponible
     category: 'Espresso',
     rating: 4.3,
-    size: ['S', 'M'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
   {
@@ -69,10 +69,10 @@ export const coffeeList: Coffee[] = [
     name: 'Latte',
     description: 'With Vanilla',
     price: 4.50,
-    image: cappuccinoImage, // Remplacez par require('../assets/images/coffee/latte1.png') quand disponible
+    image: require('../assets/images/coffee/latte1.png'), // Remplacez par require('../assets/images/coffee/latte1.png') quand disponible
     category: 'Latte',
     rating: 4.7,
-    size: ['S', 'M', 'L'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
   {
@@ -80,10 +80,10 @@ export const coffeeList: Coffee[] = [
     name: 'Americano',
     description: 'Classic Americano',
     price: 3.00,
-    image: cappuccinoImage, // Remplacez par require('../assets/images/coffee/americano1.png') quand disponible
+    image: require('../assets/images/coffee/americano.png'), // Remplacez par require('../assets/images/coffee/americano1.png') quand disponible
     category: 'Americano',
     rating: 4.2,
-    size: ['S', 'M', 'L'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
   {
@@ -94,7 +94,7 @@ export const coffeeList: Coffee[] = [
     image: cappuccinoImage,
     category: 'Cappuccino',
     rating: 4.9,
-    size: ['S', 'M', 'L'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
   {
@@ -105,7 +105,7 @@ export const coffeeList: Coffee[] = [
     image: require('../assets/images/coffee/espresso1.png') ,
     category: 'Espresso',
     rating: 4.0,
-    size: ['S', 'M'],
+    size: ['Small', 'Medium', 'Large'],
     LevelSugar: ['No Sugar','Low', 'Medium']
   },
 ];

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useCoffee } from '../context/CoffeeContext';
 
 interface CartItemProps {
   name: string;
@@ -9,6 +10,7 @@ interface CartItemProps {
   price: number;
   quantity: number;
   image: any;
+  coffeeId: string;
   onIncrease: () => void;
   onDecrease: () => void;
   onRemove: () => void;
@@ -22,37 +24,60 @@ const CartItem: React.FC<CartItemProps> = ({
   price,
   quantity,
   image,
+  coffeeId,
   onIncrease,
   onDecrease,
   onRemove,
 }) => {
+  const { toggleFavorite, isFavorite } = useCoffee();
+  const favorite = isFavorite(coffeeId);
+
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        {image ? (
-          <Image source={image} style={styles.image} resizeMode="cover" />
-        ) : (
-          <View style={styles.placeholderContainer}>
-            <Text style={styles.placeholderText}>☕</Text>
+      <View style={styles.imageSection}>
+        <View style={styles.imageContainer}>
+          {image ? (
+            <Image source={image} style={styles.image} resizeMode="cover" />
+          ) : (
+            <View style={styles.placeholderContainer}>
+              <Text style={styles.placeholderText}>☕</Text>
+            </View>
+          )}
+        </View>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.details}>
+            Cap Size: <Text style={styles.detailsValue}>{size}</Text>
+          </Text>
+          <Text style={styles.details}>
+            Level Sugar: <Text style={styles.detailsValue}>{sugarLevel}</Text>
+          </Text>
+        </View>
+      </View>
+      <View style={styles.rightSection}>
+        <View style={styles.infoContainer}>
+          <View style={styles.nameRow}>
+            <Text style={styles.name}>{name}</Text>
+            <TouchableOpacity
+              style={styles.favoriteButton}
+              onPress={() => toggleFavorite(coffeeId)}>
+              <Text style={styles.favoriteIcon}>
+                {favorite ? '❤️' : '🤍'}
+              </Text>
+            </TouchableOpacity>
           </View>
-        )}
-      </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.description}>{description}</Text>
-        <Text style={styles.price}>{price.toFixed(2)} DT</Text>
-        <Text style={styles.details}>Cap Size: {size}</Text>
-        <Text style={styles.details}>Level Sugar: {sugarLevel}</Text>
-      </View>
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity onPress={onDecrease} activeOpacity={0.7}>
-          <Text style={styles.quantity}>{quantity}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={onIncrease}>
-          <Text style={styles.addButtonText}>+</Text>
-        </TouchableOpacity>
+          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.price}>{price.toFixed(2)} DT</Text>
+        </View>
+        <View style={styles.actionsContainer}>
+          <TouchableOpacity onPress={onDecrease} activeOpacity={0.7}>
+            <Text style={styles.quantity}>{quantity}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={onIncrease}>
+            <Text style={styles.addButtonText}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -70,18 +95,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+    alignItems: 'flex-start',
+  },
+  imageSection: {
+    marginRight: 10,
     alignItems: 'center',
+    flexShrink: 0,
   },
   imageContainer: {
     width: 70,
     height: 70,
     borderRadius: 12,
     backgroundColor: '#F5F5F5',
-    marginRight: 10,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
-    flexShrink: 0,
+    marginBottom: 8,
   },
   image: {
     width: '100%',
@@ -97,27 +126,61 @@ const styles = StyleSheet.create({
     fontSize: 40,
     opacity: 0.3,
   },
+  rightSection: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginRight: 8,
+    minWidth: 0,
+  },
   infoContainer: {
     flex: 1,
-    marginRight: 8,
     minWidth: 0, // Permet au flex de fonctionner correctement
+  },
+  nameRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+    width: '100%',
   },
   name: {
     fontSize: 16,
     fontWeight: '600',
     color: '#2C1810',
-    marginBottom: 4,
+    flex: 1,
+    alignSelf: 'center',
+  },
+  favoriteButton: {
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+    alignSelf: 'center',
+  },
+  favoriteIcon: {
+    fontSize: 18,
   },
   description: {
     fontSize: 12,
     color: '#9B9B9B',
     marginBottom: 4,
   },
+  detailsContainer: {
+    alignItems: 'center',
+    width: 70,
+  },
   details: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#9B9B9B',
     marginBottom: 2,
     fontWeight: '400',
+    textAlign: 'center',
+  },
+  detailsValue: {
+    fontWeight: 'bold',
+    color: '#2C1810',
   },
   price: {
     fontSize: 16,
@@ -131,6 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     gap: 12,
     flexShrink: 0,
+    marginTop: 8,
   },
   quantity: {
     fontSize: 24,

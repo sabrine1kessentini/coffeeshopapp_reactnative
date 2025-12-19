@@ -60,36 +60,6 @@ const Orders: React.FC<OrdersProps> = ({ navigation }) => {
     });
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'pending':
-        return '#FFA500';
-      case 'preparing':
-        return '#2196F3';
-      case 'ready':
-        return '#4CAF50';
-      case 'completed':
-        return '#9B9B9B';
-      default:
-        return '#9B9B9B';
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'pending':
-        return 'En attente';
-      case 'preparing':
-        return 'En préparation';
-      case 'ready':
-        return 'Prêt';
-      case 'completed':
-        return 'Terminé';
-      default:
-        return status;
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -122,15 +92,6 @@ const Orders: React.FC<OrdersProps> = ({ navigation }) => {
                   <View>
                     <Text style={styles.orderId}>Commande #{order.id.split('-')[1]}</Text>
                     <Text style={styles.orderDate}>{formatDate(order.date)}</Text>
-                  </View>
-                  <View
-                    style={[
-                      styles.statusBadge,
-                      { backgroundColor: getStatusColor(order.status) },
-                    ]}>
-                    <Text style={styles.statusText}>
-                      {getStatusText(order.status)}
-                    </Text>
                   </View>
                 </View>
 
@@ -260,16 +221,6 @@ const styles = StyleSheet.create({
   orderDate: {
     fontSize: 12,
     color: '#9B9B9B',
-  },
-  statusBadge: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 12,
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#FFFFFF',
   },
   itemsContainer: {
     marginBottom: 16,
