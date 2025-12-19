@@ -69,14 +69,21 @@ const CartItem: React.FC<CartItemProps> = ({
           <Text style={styles.price}>{price.toFixed(2)} DT</Text>
         </View>
         <View style={styles.actionsContainer}>
-          <TouchableOpacity onPress={onDecrease} activeOpacity={0.7}>
-            <Text style={styles.quantity}>{quantity}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={onIncrease}>
-            <Text style={styles.addButtonText}>+</Text>
-          </TouchableOpacity>
+          <Text style={styles.quantity}>{quantity}</Text>
+          <View style={styles.buttonsColumn}>
+            <TouchableOpacity
+              style={styles.decreaseButton}
+              onPress={onDecrease}
+              activeOpacity={0.7}>
+              <Text style={styles.decreaseButtonText}>-</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={onIncrease}
+              activeOpacity={0.7}>
+              <Text style={styles.addButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -195,6 +202,30 @@ const styles = StyleSheet.create({
     gap: 12,
     flexShrink: 0,
     marginTop: 8,
+  },
+  buttonsColumn: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  decreaseButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#2D5016',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  decreaseButtonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
   },
   quantity: {
     fontSize: 24,

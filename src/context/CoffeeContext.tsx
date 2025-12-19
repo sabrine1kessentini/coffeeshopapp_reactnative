@@ -17,7 +17,6 @@ export interface Order {
   items: CartItem[];
   total: number;
   date: Date;
-  status: 'pending' | 'preparing' | 'ready' | 'completed';
 }
 
 interface CoffeeContextType {
@@ -184,7 +183,7 @@ export const CoffeeProvider: React.FC<CoffeeProviderProps> = ({ children }) => {
       items: [...items],
       total,
       date: new Date(),
-      status: 'pending',
+      
     };
     setOrders((prevOrders) => [newOrder, ...prevOrders]);
     return newOrder.id;

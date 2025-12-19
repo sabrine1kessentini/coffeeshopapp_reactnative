@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,8 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
-  Alert,
-  Share,
 } from 'react-native';
 import { useCoffee } from '../context/CoffeeContext';
-import { getOrdersAsJson } from '../utils/ordersStorage';
 
 interface OrdersProps {
   navigation: any;
@@ -18,36 +15,6 @@ interface OrdersProps {
 
 const Orders: React.FC<OrdersProps> = ({ navigation }) => {
   const { orders } = useCoffee();
-  const [showJson, setShowJson] = useState(false);
-
-  const handleExportJson = async () => {
-    try {
-      const jsonData = await getOrdersAsJson();
-      await Share.share({
-        message: `Commandes JSON:\n\n${jsonData}`,
-        title: 'Export des commandes',
-      });
-    } catch (error) {
-      Alert.alert('Erreur', 'Impossible d\'exporter les commandes');
-    }
-  };
-
-  const handleViewJson = async () => {
-    try {
-      const jsonData = await getOrdersAsJson();
-      Alert.alert(
-        'Commandes JSON',
-        jsonData,
-        [
-          { text: 'Fermer', style: 'cancel' },
-          { text: 'Partager', onPress: handleExportJson },
-        ],
-        { userInterfaceStyle: 'light' }
-      );
-    } catch (error) {
-      Alert.alert('Erreur', 'Impossible de charger les commandes');
-    }
-  };
 
   const formatDate = (date: Date) => {
     const d = new Date(date);
@@ -69,11 +36,7 @@ const Orders: React.FC<OrdersProps> = ({ navigation }) => {
           <Text style={styles.backIcon}>←</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Mes Commandes</Text>
-        <TouchableOpacity
-          style={styles.jsonButton}
-          onPress={handleViewJson}>
-          <Text style={styles.jsonButtonText}>📄</Text>
-        </TouchableOpacity>
+        <View style={styles.placeholder} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
         {orders.length === 0 ? (
@@ -157,16 +120,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#2C1810',
   },
-  jsonButton: {
+  placeholder: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  jsonButtonText: {
-    fontSize: 20,
   },
   scrollView: {
     flex: 1,

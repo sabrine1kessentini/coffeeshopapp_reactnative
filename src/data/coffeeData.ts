@@ -15,19 +15,17 @@ export interface Coffee {
 export interface Category {
   id: string;
   name: string;
-  
+  icon: string;
 }
 
 // Catégories disponibles
 export const categories: Category[] = [
-  { id: '1', name: 'Cappuccino' },
-  { id: '2', name: 'Espresso' },
-  { id: '3', name: 'Latte' },
-  { id: '4', name: 'Americano' },
+  { id: '1', name: 'Cappuccino', icon: '☕' },
+  { id: '2', name: 'Espresso', icon: '☕' },
+  { id: '3', name: 'Latte', icon: '☕' },
+  { id: '4', name: 'Americano', icon: '☕' },
 ];
 
-// Charger l'image une seule fois pour éviter les erreurs
-const cappuccinoImage = require('../assets/images/coffee/Cappuccino.png');
 
 // Liste des produits avec leurs images
 export const coffeeList: Coffee[] = [
@@ -91,7 +89,7 @@ export const coffeeList: Coffee[] = [
     name: 'Cappuccino',
     description: 'With Caramel',
     price: 4.80,
-    image: cappuccinoImage,
+    image: require('../assets/images/coffee/Cappuccino.png'),
     category: 'Cappuccino',
     rating: 4.9,
     size: ['Small', 'Medium', 'Large'],

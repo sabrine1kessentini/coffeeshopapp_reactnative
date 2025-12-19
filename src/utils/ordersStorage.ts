@@ -18,7 +18,6 @@ interface OrderJson {
   }>;
   total: number;
   date: string;
-  status: 'pending' | 'preparing' | 'ready' | 'completed';
 }
 
 // Sauvegarder les commandes
@@ -38,7 +37,6 @@ export const saveOrders = async (orders: Order[]): Promise<void> => {
       })),
       total: order.total,
       date: order.date.toISOString(),
-      status: order.status,
     }));
 
     await AsyncStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(ordersJson, null, 2));
@@ -78,13 +76,21 @@ export const loadOrders = async (): Promise<Order[]> => {
       })),
       total: orderJson.total,
       date: new Date(orderJson.date),
-      status: orderJson.status,
     }));
 
     return orders;
   } catch (error) {
     console.error('Error loading orders:', error);
     return [];
+  }
+};
+
+// Supprimer toutes les commandes
+export const clearOrders = async (): Promise<void> => {
+  try {
+    await AsyncStorage.removeItem(ORDERS_STORAGE_KEY);
+  } catch (error) {
+    console.error('Error clearing orders:', error);
   }
 };
 
